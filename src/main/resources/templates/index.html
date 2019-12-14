@@ -19,7 +19,7 @@
         <dt>Gehuwd</dt>
         <dd th:text="*{gehuwd} ? 'Ja' : 'Nee'"></dd>
         <dt>Adres</dt>
-        <dd th:object="${zaakvoerder.adres}" 
+        <dd th:object="${zaakvoerder.adres}"
             th:text="|*{straat} *{huisNr} *{postcode} *{gemeente}|"></dd>
     </dl>
 
