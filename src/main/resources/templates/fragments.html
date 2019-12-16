@@ -4,11 +4,13 @@
     <title th:text="${title}"></title>
     <link rel="stylesheet" th:href="@{/css/luigi.css}">
 </head>
+<body>
 <nav th:fragment="menu" xmlns:th='http://www.thymeleaf.org'>
     <ul>
         <li><a th:href="@{/}">Welkom</a></li>
         <li><a th:href="@{/pizzas}">Pizza's</a></li>
+        <li><a th:href="@{/os}">OS</a></li>
     </ul>
 </nav>
-
+</body>
 </html>
