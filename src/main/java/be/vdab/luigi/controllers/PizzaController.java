@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("pizzas")
@@ -30,6 +32,29 @@ public class PizzaController {
        ModelAndView modelAndView = new ModelAndView("pizza");
        Arrays.stream(pizzas).filter(pizza -> pizza.getId() ==id).findFirst()
                .ifPresent(pizza -> modelAndView.addObject("pizza", pizza));
+       return modelAndView;
+   }
+
+   private List<BigDecimal> uniekePrijzen(){
+       return Arrays.stream(pizzas).map(pizza->pizza.getPrijs())
+               .distinct().sorted().collect(Collectors.toList());
+   }
+
+   @GetMapping("prijzen")
+    public ModelAndView prijzen(){
+       return new ModelAndView("prijzen", "prijzen", uniekePrijzen());
+   }
+
+   private List<Pizza> pizzasMetPrijs(BigDecimal prijs){
+       return Arrays.stream(pizzas)
+               .filter(pizza -> pizza.getPrijs().compareTo(prijs)==0)
+               .collect(Collectors.toList());
+   }
+
+   @GetMapping("prijzen/{prijs}")
+    public ModelAndView pizzasMetEenPrijs(@PathVariable BigDecimal prijs){
+       ModelAndView modelAndView=new ModelAndView("prijzen", "pizzas", pizzasMetPrijs(prijs));
+       modelAndView.addObject("prijzen", uniekePrijzen());
        return modelAndView;
    }
 }
