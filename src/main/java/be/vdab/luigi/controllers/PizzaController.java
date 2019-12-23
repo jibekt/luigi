@@ -1,6 +1,6 @@
 package be.vdab.luigi.controllers;
 
-import be.vdab.luigi.domain.Pizza;
+import  be.vdab.luigi.domain.Pizza;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +21,7 @@ public class PizzaController {
             new Pizza(3, "Calzone", BigDecimal.valueOf(4), false)};
    @GetMapping
     public ModelAndView pizzas (){
+
        return new ModelAndView("pizzas", "pizzas", pizzas);
    }
 
