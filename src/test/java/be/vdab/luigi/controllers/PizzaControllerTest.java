@@ -1,15 +1,26 @@
 package be.vdab.luigi.controllers;
 import be.vdab.luigi.domain.Pizza;
+import be.vdab.luigi.services.EuroService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(MockitoExtension.class)
 public class PizzaControllerTest {
     private PizzaController controller;
+    @Mock
+    private EuroService euroService;
     @Before
     public void before() {
-        controller = new PizzaController();
+        controller = new PizzaController(euroService);
     }
     @Test
     public void pizzasGebruiktDeThymeleafPaginaPizzas() {
