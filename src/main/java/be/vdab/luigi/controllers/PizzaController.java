@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("pizzas")
 public class PizzaController {
-    //private final String[] pizzas = new String[]{"Prosciutto", "Margherita", "Calzone"};
     private final EuroService euroService;
 
     public PizzaController(EuroService euroService){

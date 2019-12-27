@@ -3,14 +3,13 @@ package be.vdab.luigi.restclients;
 import be.vdab.luigi.exceptions.KoersClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -19,15 +18,8 @@ import java.util.Scanner;
 public class FixerKoersClient implements KoersClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final URL url;
-    FixerKoersClient(){
-        try{
-            url= new URL(
-                    "http://data.fixer.io/api/latest?access_key=5fc8ed4ce49c6b12c137e71c8988ed5c&symbols=USD");
-        } catch (MalformedURLException ex){
-            String fout = "Fixeer URL is verkeerd";
-            logger.error(fout, ex);
-            throw new KoersClientException(fout);
-        }
+    FixerKoersClient(@Value("${fixerKoersURL}") URL url){
+        this.url=url;
     }
     @Override
     public BigDecimal getDollarKoers(){
