@@ -4,6 +4,7 @@ import be.vdab.luigi.exceptions.KoersClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-@Qualifier("Fixer")
+@Order(1)
 @Component
 public class FixerKoersClient implements KoersClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

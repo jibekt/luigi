@@ -4,6 +4,7 @@ import be.vdab.luigi.exceptions.KoersClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.xml.stream.XMLInputFactory;
@@ -16,7 +17,7 @@ import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@Qualifier("ECB")
+@Order(2)
 @Component
 public class ECBKoersClient implements KoersClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
