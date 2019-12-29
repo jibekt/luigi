@@ -1,6 +1,10 @@
 package be.vdab.luigi.controllers;
+import static org.mockito.Mockito.when;
 import be.vdab.luigi.domain.Pizza;
+import be.vdab.luigi.services.DefaultEuroService;
+import be.vdab.luigi.services.DefaultPizzaService;
 import be.vdab.luigi.services.EuroService;
+import be.vdab.luigi.services.PizzaService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +14,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,9 +24,12 @@ public class PizzaControllerTest {
     private PizzaController controller;
     @Mock
     private EuroService euroService;
+    private PizzaService pizzaService;
     @Before
     public void before() {
-        controller = new PizzaController(euroService);
+        when(pizzaService.findById(1))
+                .thenReturn(Optional.of(new Pizza(1, "Test", BigDecimal.ONE, true)));
+        controller = new PizzaController(euroService, pizzaService);
     }
     @Test
     public void pizzasGebruiktDeThymeleafPaginaPizzas() {
@@ -28,8 +37,7 @@ public class PizzaControllerTest {
     }
     @Test
     public void pizzasGeeftPizzasDoorAanDeThymeleafPagina() {
-        assertThat(controller.pizzas().getModel().get("pizzas") instanceof Pizza[])
-                .isTrue();
+        assertThat(controller.pizzas().getModel().get("pizzas") instanceof List);
     }
     @Test
     public void pizzaGebruiktDeThymeleafPaginaPizza() {
