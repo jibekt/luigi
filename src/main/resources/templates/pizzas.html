@@ -14,7 +14,7 @@
         </li>-->
 
         <li th:each="pizza:${pizzas}" th:object="${pizza}">
-            <span th:text="|*{naam} EUR *{prijs}|"></span>
+            <span th:text="|*{naam} EUR *{{prijs}}|"></span>
             <span th:if="*{pikant}"> pikant</span>
             <a th:href="@{/pizzas/{id}(id=*{id})}">detail</a>
         </li>
