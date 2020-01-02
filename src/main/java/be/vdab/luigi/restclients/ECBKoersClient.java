@@ -17,7 +17,6 @@ import java.math.BigDecimal;
 import java.net.URL;
 
 @Order(2)
-@Component
 public class ECBKoersClient implements KoersClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final URL url;

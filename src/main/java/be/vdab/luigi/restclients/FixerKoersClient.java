@@ -14,7 +14,6 @@ import java.net.URL;
 import java.util.Scanner;
 
 @Order(1)
-@Component
 public class FixerKoersClient implements KoersClient {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final URL url;
